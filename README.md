@@ -25,6 +25,7 @@ Database contains three tables:
 In order to prevent multiple subqueries, views were used.
 View for the 1st quiestion:
 ```
+CREATE VIEW top_three_articles AS 
 SELECT a.title, COUNT(l.path) as number
 FROM articles AS a, log AS l
 WHERE '/article/' || a.slug = l.path
@@ -51,7 +52,8 @@ Views for the 3rd question
 1. Extracts the date from timestamp and calculates the number of errors and total number of requests
 ```
 CREATE VIEW error_analysis AS 
-SELECT log.time::timestamp::date AS date, count(CASE WHEN log.status = '404 NOT FOUND' then 'error' end) AS errors,
+SELECT log.time::timestamp::date AS date, 
+COUNT(CASE WHEN log.status = '404 NOT FOUND' THEN 'error' END) AS errors,
 COUNT(*) AS requests 
 FROM log 
 GROUP BY date;
