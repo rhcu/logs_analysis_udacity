@@ -18,7 +18,7 @@ and unzip the file and put newsdata.sql into your vagrant directory
 * Connect to your DB running: 
  `psql -d news`
 * Run `CREATE VIEW` statements presented below
-* Run the script `python analysis.py`
+* Run the script `python log_analysis.py`
 # Newsdata Database 
 Database contains three tables: 
 1.
