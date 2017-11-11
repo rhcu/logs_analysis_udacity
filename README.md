@@ -5,18 +5,12 @@ Vagrant and VirtualBox are needed to be installed before running the program to 
 Also, installed [Python](https://www.python.org/downloads/) is required.
 # How to start
 * After the installation, create your Virtual Machine by running in command line 
-    'vagrant up'
-
+    `vagrant up`
 * Enter  your Virtual Machine after the previous command by 
-'''
-vagrant ssh
-'''
+`vagrant ssh`
 * [Download the data here](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)
-
-Unzip the file and put newsdata.sql into your vagrant directory
-* Download the data to your VM using 
-'''
-psql -d news -f newsdata.sql
-'''
-* Connect to your DB using: 
- psql -d news
+and unzip the file and put newsdata.sql into your vagrant directory
+* Download the data to your VM running `psql -d news -f newsdata.sql`
+* Connect to your DB running: 
+ `psql -d news`
+* Run the script `python analysis.py`
