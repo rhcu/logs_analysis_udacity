@@ -48,8 +48,9 @@ SELECT authors.name, author_views.views
 FROM authors LEFT OUTER JOIN author_views 
 ON authors.id = author_views.author;
 ```
-Views for the 3rd question
-1. Extracts the date from timestamp and calculates the number of errors and total number of requests
+
+View for the 3rd question
+Extracts the date from timestamp and calculates the number of errors and total number of requests
 ```
 CREATE VIEW error_analysis AS 
 SELECT log.time::timestamp::date AS date, 
@@ -58,7 +59,4 @@ COUNT(*) AS requests
 FROM log 
 GROUP BY date;
 ```
-SQL Query 
-```
-SELECT date, (errors*100/requests) AS percent FROM error_analysis WHERE (errors*100/requests) > 1;;
 
