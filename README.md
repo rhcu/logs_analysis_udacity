@@ -5,7 +5,7 @@ Vagrant and VirtualBox are needed to be installed before running the program to 
 Also, installed [Python](https://www.python.org/downloads/) is required.
 # How to start
 * After the installation, create your Virtual Machine by running in command line 
-'vagrant up'
+    'vagrant up'
 
 * Enter  your Virtual Machine after the previous command by 
 '''
