@@ -7,11 +7,10 @@ The 3rd projects made as a part of Udacity Full Stack Web Development Nanodegree
 
 **3. On which days did more than 1% of requests lead to errors?**
 
-Created using Python `psycopg2` to connect to PostgreSQL DBMS.
-
 # Required software
 Vagrant and VirtualBox are needed to be installed before running the program to provide Linux environment. Vagrant can be downloaded from HashiCorp [website](https://www.vagrantup.com/), and VirtualBox from [here](https://www.virtualbox.org/). If you face some problems during the installation of Vagrant, you can find answers either at [Stack OverFlow](https://stackoverflow.com/search?q=vagrant) or in the [GitHub repository](https://github.com/hashicorp/vagrant) of Vagrant itself. 
-Also, installed [Python 2.7](https://www.python.org/downloads/) is required. 
+
+Also, installed [Python 2.7](https://www.python.org/downloads/) is required, and `psycopg2` library, which connects Python code with PostgreSQL DBMS. 
 # How to start
 * After the installation, create your Virtual Machine by running in command line 
     `vagrant up`
