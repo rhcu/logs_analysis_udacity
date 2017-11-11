@@ -1,10 +1,11 @@
-# logs_analysis_udacity
+# Udacity Logs Analysis Project
 The 3rd projects made as a part of Udacity Full Stack Web Development Nanodegree. Project represents a reporting tool that prints the result of queries in the plain text to console, answering the following 3 questions:
 **1. What are the most popular three articles of all time? 
 2. Who are the most popular article authors of all time? 
 3. On which days did more than 1% of requests lead to errors?**
 
 Created using Python `psycopg2` to connect to PostgreSQL DBMS.
+
 # Required software
 Vagrant and VirtualBox are needed to be installed before running the program to provide Linux environment. Vagrant can be downloaded from HashiCorp [website](https://www.vagrantup.com/), and VirtualBox from [here](https://www.virtualbox.org/). If you face some problems during the installation of Vagrant, you can find answers either at [Stack OverFlow](https://stackoverflow.com/search?q=vagrant) or in the [GitHub repository](https://github.com/hashicorp/vagrant) of Vagrant itself. 
 Also, installed [Python 2.7](https://www.python.org/downloads/) is required. 
