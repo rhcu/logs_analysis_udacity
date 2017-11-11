@@ -1,12 +1,13 @@
 # logs_analysis_udacity
-The 3rd projects made as a part of Udacity Full Stack Web Development Nanodegree. Project represents a reporting tool that prints the result of queries in the plain text, answering the following 3 questions:
-1. What are the most popular three articles of all time? 
+The 3rd projects made as a part of Udacity Full Stack Web Development Nanodegree. Project represents a reporting tool that prints the result of queries in the plain text to console, answering the following 3 questions:
+**1. What are the most popular three articles of all time? 
 2. Who are the most popular article authors of all time? 
-3. On which days did more than 1% of requests lead to errors? 
+3. On which days did more than 1% of requests lead to errors?**
+
 Created using Python `psycopg2` to connect to PostgreSQL DBMS.
 # Required software
-Vagrant and VirtualBox are needed to be installed before running the program to provide Linux environment. In order to install Vagrant go to their [website](https://www.vagrantup.com/), and [VirtualBox](https://www.virtualbox.org/). If you face some problems during installation of Vagrant, you can find answers either at [Stack OverFlow](https://stackoverflow.com/search?q=vagrant) or in the [GitHub repository](https://github.com/hashicorp/vagrant) of Vagrant itself. 
-Also, installed [Python](https://www.python.org/downloads/) is required.
+Vagrant and VirtualBox are needed to be installed before running the program to provide Linux environment. Vagrant can be downloaded from HashiCorp [website](https://www.vagrantup.com/), and VirtualBox from [here](https://www.virtualbox.org/). If you face some problems during the installation of Vagrant, you can find answers either at [Stack OverFlow](https://stackoverflow.com/search?q=vagrant) or in the [GitHub repository](https://github.com/hashicorp/vagrant) of Vagrant itself. 
+Also, installed [Python 2.7](https://www.python.org/downloads/) is required. 
 # How to start
 * After the installation, create your Virtual Machine by running in command line 
     `vagrant up`
@@ -23,7 +24,7 @@ and unzip the file and put newsdata.sql into your vagrant directory
 Database contains three tables: 
 1.
 In order to prevent multiple subqueries, views were used.
-View for the 1st quiestion:
+**View for the 1st quiestion:**
 ```
 CREATE VIEW top_three_articles AS 
 SELECT a.title, COUNT(l.path) as number
@@ -33,7 +34,7 @@ GROUP BY a.title
 ORDER BY number DESC
 LIMIT 3;
 ```
-View for the 2nd question:
+**View for the 2nd question:**
 The view to collect the number of views associated to author ID
 ```
 CREATE VIEW author_views AS
@@ -43,7 +44,7 @@ ON '/article/'||a.slug = l.path
 GROUP BY a.author ORDER BY views DESC;
 ```
 
-View for the 3rd question
+**View for the 3rd question**
 Extracts the date from timestamp and calculates the number of errors and total number of requests
 ```
 CREATE VIEW error_analysis AS 
@@ -53,6 +54,8 @@ COUNT(*) AS requests
 FROM log 
 GROUP BY date;
 ```
-# Results of analysis
+## Results of analysis
 Answers for the questions are presented in the `answers.txt` file.
 
+## License
+Was built as a part of [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/)
