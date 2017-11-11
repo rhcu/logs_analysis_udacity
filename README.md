@@ -56,3 +56,7 @@ COUNT(*) AS requests
 FROM log 
 GROUP BY date;
 ```
+SQL Query 
+```
+SELECT date, (errors*100/requests) AS percent FROM error_analysis WHERE (errors*100/requests) > 1;;
+
