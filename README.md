@@ -1,5 +1,9 @@
 # logs_analysis_udacity
-The 3rd projects made as a part of Udacity Full Stack Web Development Nanodegree
+The 3rd projects made as a part of Udacity Full Stack Web Development Nanodegree. Project represents a reporting tool that prints the result of queries in the plain text, answering the following 3 questions:
+1. What are the most popular three articles of all time? 
+2. Who are the most popular article authors of all time? 
+3. On which days did more than 1% of requests lead to errors? 
+Created using Python `psycopg2` to connect to PostgreSQL DBMS.
 # Required software
 Vagrant and VirtualBox are needed to be installed before running the program to provide Linux environment. In order to install Vagrant go to their [website](https://www.vagrantup.com/), and [VirtualBox](https://www.virtualbox.org/). If you face some problems during installation of Vagrant, you can find answers either at [Stack OverFlow](https://stackoverflow.com/search?q=vagrant) or in the [GitHub repository](https://github.com/hashicorp/vagrant) of Vagrant itself. 
 Also, installed [Python](https://www.python.org/downloads/) is required.
@@ -13,4 +17,42 @@ and unzip the file and put newsdata.sql into your vagrant directory
 * Download the data to your VM running `psql -d news -f newsdata.sql`
 * Connect to your DB running: 
  `psql -d news`
+* Run `CREATE VIEW` statements presented below
 * Run the script `python analysis.py`
+# Newsdata Database 
+Database contains three tables: 
+1.
+In order to prevent multiple subqueries, views were used.
+View for the 1st quiestion:
+```
+SELECT a.title, COUNT(l.path) as number
+FROM articles AS a, log AS l
+WHERE '/article/' || a.slug = l.path
+GROUP BY a.title
+ORDER BY number DESC
+LIMIT 3;
+```
+Views for the 2nd question:
+1. The view to collect the number of views associated to author ID
+```
+CREATE VIEW author_views AS
+SELECT a.author, COUNT(l.path) AS views 
+FROM articles AS a LEFT OUTER JOIN log AS l
+ON '/article/'||a.slug = l.path
+GROUP BY a.author ORDER BY views DESC;
+```
+2. SQL query to associate id from author_views to the name of the author.
+```
+SELECT authors.name, author_views.views
+FROM authors LEFT OUTER JOIN author_views 
+ON authors.id = author_views.author;
+```
+Views for the 3rd question
+1. Extracts the date from timestamp and calculates the number of errors and total number of requests
+```
+CREATE VIEW error_analysis AS 
+SELECT log.time::timestamp::date AS date, count(CASE WHEN log.status = '404 NOT FOUND' then 'error' end) AS errors,
+COUNT(*) AS requests 
+FROM log 
+GROUP BY date;
+```
