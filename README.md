@@ -33,20 +33,14 @@ GROUP BY a.title
 ORDER BY number DESC
 LIMIT 3;
 ```
-Views for the 2nd question:
-1. The view to collect the number of views associated to author ID
+View for the 2nd question:
+The view to collect the number of views associated to author ID
 ```
 CREATE VIEW author_views AS
 SELECT a.author, COUNT(l.path) AS views 
 FROM articles AS a LEFT OUTER JOIN log AS l
 ON '/article/'||a.slug = l.path
 GROUP BY a.author ORDER BY views DESC;
-```
-2. SQL query to associate id from author_views to the name of the author.
-```
-SELECT authors.name, author_views.views
-FROM authors LEFT OUTER JOIN author_views 
-ON authors.id = author_views.author;
 ```
 
 View for the 3rd question
