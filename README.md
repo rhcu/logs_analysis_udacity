@@ -53,4 +53,6 @@ COUNT(*) AS requests
 FROM log 
 GROUP BY date;
 ```
+# Results of analysis
+Answers for the questions are presented in the `answers.txt` file.
 
