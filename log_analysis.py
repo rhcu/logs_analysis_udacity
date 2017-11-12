@@ -31,8 +31,8 @@ def main():
     # uses author_views view
     # associates id in author_views to name of the author from authors table
     sql_top_authors = """
-        SELECT authors.name,
-        author_views.views
+        SELECT a.name,
+            v.views
         FROM authors AS a
         LEFT OUTER JOIN author_views AS v ON a.id = v.author;
         """
