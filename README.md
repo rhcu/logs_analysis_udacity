@@ -25,36 +25,31 @@ and unzip the file and put newsdata.sql into your vagrant directory
 * Run the script `python log_analysis.py`
 # Newsdata Database 
 Database contains three tables: 
-1.
-In order to prevent multiple subqueries, views were used.
-**View for the 1st quiestion:**
-```
-CREATE VIEW top_three_articles AS 
-SELECT a.title, COUNT(l.path) as number
-FROM articles AS a, log AS l
-WHERE '/article/' || a.slug = l.path
-GROUP BY a.title
-ORDER BY number DESC
-LIMIT 3;
-```
+`articles`, `log`, `authors`.
+
+In order to prevent multiple subqueries, views for the 2nd and 3rd questions were used.
 **View for the 2nd question:**
 The view to collect the number of views associated to author ID
 ```
 CREATE VIEW author_views AS
-SELECT a.author, COUNT(l.path) AS views 
-FROM articles AS a LEFT OUTER JOIN log AS l
-ON '/article/'||a.slug = l.path
-GROUP BY a.author ORDER BY views DESC;
+SELECT a.author,
+       COUNT(l.path) AS views
+FROM articles AS a
+LEFT OUTER JOIN log AS l ON '/article/'||a.slug = l.path
+GROUP BY a.author
+ORDER BY views DESC;
 ```
 
 **View for the 3rd question**
 Extracts the date from timestamp and calculates the number of errors and total number of requests
 ```
-CREATE VIEW error_analysis AS 
-SELECT log.time::timestamp::date AS date, 
-COUNT(CASE WHEN log.status = '404 NOT FOUND' THEN 'error' END) AS errors,
-COUNT(*) AS requests 
-FROM log 
+CREATE VIEW error_analysis AS
+SELECT log.time::TIMESTAMP::date AS date,
+       COUNT(CASE
+                 WHEN log.status = '404 NOT FOUND' THEN 'error'
+             END) AS errors,
+       COUNT(*) AS requests
+FROM log
 GROUP BY date;
 ```
 ## Results of analysis
