@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 import psycopg2
 
 
@@ -7,9 +8,16 @@ def main():
     print("      ")
     # cursor object, used to perform queries
     cursor = conn.cursor()
-    # uses top_three_articles view created previously
+    # no views created for the 1st question as it relatively simple
     sql_top_articles = """
-        SELECT * from top_three_articles;
+       SELECT a.title,
+       COUNT(l.path) AS number
+       FROM articles AS a,
+            log AS l
+       WHERE '/article/' || a.slug = l.path
+       GROUP BY a.title
+       ORDER BY number DESC
+       LIMIT 3;
         """
     # executes the query
     cursor.execute(sql_top_articles)
@@ -23,9 +31,10 @@ def main():
     # uses author_views view
     # associates id in author_views to name of the author from authors table
     sql_top_authors = """
-        SELECT authors.name, author_views.views
-        FROM authors LEFT OUTER JOIN author_views 
-        ON authors.id = author_views.author;
+        SELECT authors.name,
+        author_views.views
+        FROM authors AS a
+        LEFT OUTER JOIN author_views AS v ON a.id = v.author;
         """
     # executes the query
     cursor.execute(sql_top_authors)
