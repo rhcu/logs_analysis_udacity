@@ -45,10 +45,10 @@ def main():
         print(str(i)+"    {} - {} views".format(name, views))
         i = i + 1
     sql_errors_ratio = """
-        SELECT date, (CAST(errors AS FLOAT)*100/requests) AS percent 
+        SELECT date, (CAST(errors AS FLOAT)*100/requests) AS percent
         FROM error_analysis
         WHERE (CAST(errors AS FLOAT)*100/requests) > 1;
-        """
+    """
     cursor.execute(sql_errors_ratio)
     print("      ")
     print("On which days did more than 1% of requests lead to errors?")
